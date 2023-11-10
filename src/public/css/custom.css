@@ -1,0 +1,26 @@
+/* Agrega esta clase CSS en tu archivo de estilos */
+.fade-out {
+    animation: fadeOut 5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  .green-alert {
+    background-color: #00FF00; /* Cambia este color al verde que desees */
+    color: #000; /* Cambia el color del texto si es necesario */
+    padding: 10px; /* Ajusta el espaciado y el tamaño de la alerta según tus necesidades */
+    border: 1px solid #008000; /* Cambia el color del borde si es necesario */
+  }
+  
+  /* Agrega esto a tu hoja de estilos CSS */
+.bg-green-400 {
+  background-color: #48BB78; /* Cambia este valor al color verde que desees */
+  color: #ffffff; /* Cambia este valor al color de texto que desees */
+}

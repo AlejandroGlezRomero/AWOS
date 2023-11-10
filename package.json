@@ -1,0 +1,43 @@
+{
+  "name": "mx.edu.utxj.ti.dsm.awos.bienesraices-220138",
+  "version": "1.0.0",
+  "description": "Este proyecto será desarrollado con Node, Express, Sequelize, PUG, Tailwind, Leaflet, consistirá en realizar un sistema web que permita la publicación de propiedades para su compra venta",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon src/server.js",
+    "start": "node src/index.js",
+    "start-permanente": "nodemon src/index.js",
+    "css": "postcss ./src/public/css/tailwind.css -o ./src/public/css/app.css --watch"
+  },
+  "keywords": [
+    "MVC",
+    "Pug",
+    "Tailwind",
+    "MySQL",
+    "Sequelize"
+  ],
+  "author": "Alejandro González Romero 220138",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.6.1",
+    "nodemailer": "^6.9.7",
+    "pug": "^3.0.2",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.3"
+  }
+}

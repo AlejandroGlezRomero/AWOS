@@ -1,0 +1,26 @@
+extends ../layout/index
+
+block content
+  div.py-5(style="background-color: #FFE0B5;")
+    h1.text-center.text-4xl.font-extrabold.my-3.text-majorelle-blue Real
+      span.font-bold.text-reislin-black State
+    if errors
+      div(class="max-w-md mx-auto my-10")
+        each error in errors
+          p(class="bg-rose-red rounded-md text-white uppercase text-xs text-center p-2 mb-1 font-bold")= error.msg 
+  .mt-8.mx-auto.max-w-md(style="background-color: #8A6552; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);")
+    .bg-navajo-white.py-8.px-4.shadow-xl.rounded-3xl(style="background-color: #FFFFFF; padding: 20px; border-radius: 15px; color: #CA2E55; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);")
+      h2.text-center.text-3xl.font-extrabold.mb-9(style="color: #CA2E55;")= page
+      form(noValidate action="/bienes-raices/users/" method="POST").flex.items-center.flex-col.justify-center.gap-5
+        div.w-full
+          label.block.text-sm.mb-2.font-bold(for="email") Email Register
+          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-xl.mb-2(class="ease-in-out focus:outline-none focus:border-2 focus:border-rose-red" placeholder="user@alegon.com" type="email" name="email" value= user ? user.email : '')
+        div.w-full
+          label.block.text-sm.mb-2.font-bold(for="password") Password
+          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-caput-mortuum.mb-2(class="ease-in-out focus:outline-none focus:border-2 focus:border-rose-red" placeholder="Password" type="password" name="password")
+
+        div.flex.items-center.justify-between.w-full
+          a.text-xs.text-old-gold(href="/bienes-raices/users/login/register" style="color: #462521;" class="hover:underline underline-offset-6 decoration-2 decoration-majorelle-blue font-medium") Create an account
+          a.text-xs.text-caput-mortuum(href="/bienes-raices/users/login/recovery" style="color: #462521;" class="hover:underline underline-offset-6 decoration-2 decoration-majorelle-blue font-medium ease-in-out") Forgot your password? 
+            span.text-majorelle-blue Recover it
+        button(class="w-[50%] bg-reislin-black text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover:bg-english-violet/90 hover:bg-majorelle-blue active:scale-[0.95]" style="background-color: #CA2E55;" type="submit" value="Login in") Login In
