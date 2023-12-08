@@ -1,11 +1,5 @@
 import { Dropzone } from "dropzone";
 
-// Verifica si ya hay una instancia de Dropzone y destrúyela
-const existingDropzone = Dropzone.instances[0];
-if (existingDropzone) {
-    existingDropzone.destroy();
-}
-
 // Inicializa Dropzone
 Dropzone.options.image = {
     dictDefaultMessage: "Please load the selected images",

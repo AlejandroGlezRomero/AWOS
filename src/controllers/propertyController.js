@@ -103,45 +103,34 @@ const formAddImage = async (req, res) => {
 
 }
 
-const loadImage = async (request, response, next) => {
+const loadImage = async (req, res, next) => {
+    console.log(`Visualizar el formulario para agregar imagenes`)
 
-
-    const { id } = request.params;
+    const { idProperty } = req.params
+    console.log(idProperty)
+    //const userID = req.user.id
+    const property = await Property.findByPk(idProperty);
+    if (!property) {
+        return res.redirect('/home')
+    }
+    if (property.published) {
+        return res.redirect('/home')
+    }
+    if (req.User.id.toString() !== property.user_ID.toString()) {
+        return res.redirect('/home')
+    }
 
     try {
-        const searchedProperty = await Property.findByPk(id);
+//ALMACENAR LA BASE Y PUBLICAR 
+        console.log(req.file);
+        property.image = req.file.filename;
+        property.published = 1;
 
-        if (!searchedProperty) {
-            console.log('La propiedad buscada no existe');
-            return response.redirect('/home');
-        }
+        await property.save();
 
-        console.log("La propiedad buscada sí existe");
-
-        if (searchedProperty.published) {
-            console.log("La propiedad ha sido publicada y las fotos no pueden ser modificadas");
-            return response.redirect('/home');
-        }
-
-        const loggedUser = request.User.id;
-
-        if (loggedUser.toString() !== searchedProperty.user_ID.toString()) {
-            console.log("La propiedad no es del usuario");
-            return response.redirect('/home');
-        }
-
-        console.log("La propiedad sí es del usuario");
-
-        console.log(request.file);
-
-        searchedProperty.image = request.file.filename;
-        searchedProperty.published = 1;
-
-        await searchedProperty.save();
         next();
-    } catch (error) {
-        console.error(error);
-        return response.status(500).send('Error al procesar la imagen');
+    } catch (err) {
+        console.log(err)
     }
 }
 
