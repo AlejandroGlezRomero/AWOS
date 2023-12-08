@@ -1,32 +1,161 @@
-const formProperty = (res,res) => {
-  res.render('property/create.pug')
+// propertyController.js
+import { request, response } from 'express';
+import category from '../models/category.js';
+import Category from '../models/category.js';
+import Price from '../models/Price.js';
+import Property from "../models/Property.js";   
+
+const insertProperty = (request, response) => {
+    return 0;
+}
+
+const updateProperty = (request, response) => {
+    return 0;
+}
+
+const deleteProperty = (request, response) => {
+    return 0;
+}
+
+const findAllProperty = (request, response) => {
+    return 0;
+}
+
+const findAllByUserProperty = (request, response) => {
+    return 0;
+}
+
+const findOneProperty = (request, response) => {
+    return 0;
+}
+
+const formProperty = async (request, response) => {
+    console.log("Mostrando el formulario para la creación de una nueva Propiedad");
+    console.log(request.body);
+
+    const [categories, prices] = await Promise.all([Category.findAll(), Price.findAll()])
+    response.render("property/create", {
+        page: "New Property",
+        showHeader: true,
+        data: request.body,
+        categories,
+        prices
+    });
+}
+
+const saveProperty = async (request, response) => {
+    console.log('Validar y guardar datos en la Bd de datos');
+
+    const { title, description, nRooms, nParkinlots, nWC, priceRange, category, street, lat, lng } = request.body;
+    console.log(request.body);
+
+    try {
+        const loggedUser = request.User.id; // Use request.User instead of request.user
+        console.log(loggedUser);
+
+        if (loggedUser) {
+            const savedProperty = await Property.create({
+                title,
+                description,
+                nRooms,
+                nParkinlots,
+                nWC,
+                price_ID: priceRange,
+                category_ID: category,
+                address: street,
+                lat,
+                lng,
+                user_ID: loggedUser,
+            });
+
+            response.redirect(`./create/addImage/${savedProperty.id}`);
+        }
+    } catch (error) {
+        console.error(error);
+        return response.clearCookie('_token').redirect("/login");
+    }
 }
 
 
-const insertProperty = (res,res) => {
-  return 0
+const formAddImage = async (req, res) => {
+    console.log(`Visualizar el formulario para agregar imagenes`)
+
+    const { idProperty } = req.params
+    console.log(idProperty)
+    //const userID = req.user.id
+    const property = await Property.findByPk(idProperty);
+    if (!property) {
+        return res.redirect('/home')
+    }
+    if (property.published) {
+        return res.redirect('/home')
+    }
+    if (req.User.id.toString() !== property.user_ID.toString()) {
+        return res.redirect('/home')
+    }
+
+    res.render('property/addImage', {
+        property,
+        page: `Add image to ${property.title}`,
+        idProperty
+    })
+
+
 }
-const upadateProperty = (res,res) => {
-  return 0
+
+const loadImage = async (request, response, next) => {
+
+
+    const { id } = request.params;
+
+    try {
+        const searchedProperty = await Property.findByPk(id);
+
+        if (!searchedProperty) {
+            console.log('La propiedad buscada no existe');
+            return response.redirect('/home');
+        }
+
+        console.log("La propiedad buscada sí existe");
+
+        if (searchedProperty.published) {
+            console.log("La propiedad ha sido publicada y las fotos no pueden ser modificadas");
+            return response.redirect('/home');
+        }
+
+        const loggedUser = request.User.id;
+
+        if (loggedUser.toString() !== searchedProperty.user_ID.toString()) {
+            console.log("La propiedad no es del usuario");
+            return response.redirect('/home');
+        }
+
+        console.log("La propiedad sí es del usuario");
+
+        console.log(request.file);
+
+        searchedProperty.image = request.file.filename;
+        searchedProperty.published = 1;
+
+        await searchedProperty.save();
+        next();
+    } catch (error) {
+        console.error(error);
+        return response.status(500).send('Error al procesar la imagen');
+    }
 }
-const deleteProperty = (res,res) => {
-  return 0
-}
-const findAllProperties = (res,res) => {
-  return 0
-}
-const findAllByProperties = (res,res) => {
-  return 0
-}
-const findOneProperty = (res,res) => {
-  return 0
-}
+
+
 
 export {
-  insertProperty,
-  upadateProperty,
-  deleteProperty,
-  findAllByProperties,
-  findAllProperties,
-  findOneProperty
-}
+    insertProperty,
+    updateProperty,
+    deleteProperty,
+    findAllProperty,
+    findAllByUserProperty,
+    findOneProperty,
+    formProperty,
+    saveProperty,
+    formAddImage,
+    loadImage
+};

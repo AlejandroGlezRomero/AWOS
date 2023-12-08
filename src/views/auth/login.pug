@@ -1,26 +1,46 @@
-extends ../layout/index
+extends ../layout/index 
+block content 
+ div.py-10 
+    h1.text-center.text-4xl.font-extrabold.my-10.text-caput-mortuum Real 
+        span.font-normal.text-rose-red State
+    h2.text-center.text-3xl.font-extrabold.text-old-gold= page
+    if errors 
+        div(class="max-w-md mx-auto my-10")
+            each error in errors 
+                div(class="bg-red-700 border-t-4 border-red-900 rounded-b text-teal-900 px-4 py-1 shadow-xl mb-2" role="alert" id=`errorAlert-${index}`)
+                    .flex
+                        .py-1
+                            svg.fill-current.h-6.w-6.text-red-900.mr-4(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 20 20")
+                                path(d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32")
+                        div
+                            p(class="text-navajo-white uppercase text-xs  p-2 mb-1 font-bold")= error.msg
 
-block content
-  div.py-5(style="background-color: #FFE0B5;")
-    h1.text-center.text-4xl.font-extrabold.my-3.text-majorelle-blue Real
-      span.font-bold.text-reislin-black State
-    if errors
-      div(class="max-w-md mx-auto my-10")
-        each error in errors
-          p(class="bg-rose-red rounded-md text-white uppercase text-xs text-center p-2 mb-1 font-bold")= error.msg 
-  .mt-8.mx-auto.max-w-md(style="background-color: #8A6552; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);")
-    .bg-navajo-white.py-8.px-4.shadow-xl.rounded-3xl(style="background-color: #FFFFFF; padding: 20px; border-radius: 15px; color: #CA2E55; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);")
-      h2.text-center.text-3xl.font-extrabold.mb-9(style="color: #CA2E55;")= page
-      form(noValidate action="/bienes-raices/users/" method="POST").flex.items-center.flex-col.justify-center.gap-5
-        div.w-full
-          label.block.text-sm.mb-2.font-bold(for="email") Email Register
-          input#email.w-full.px-3.py-2.border.border-gray-300.rounded-xl.mb-2(class="ease-in-out focus:outline-none focus:border-2 focus:border-rose-red" placeholder="user@alegon.com" type="email" name="email" value= user ? user.email : '')
-        div.w-full
-          label.block.text-sm.mb-2.font-bold(for="password") Password
-          input#password.w-full.px-3.py-2.border.border-gray-300.rounded-xl.placeholder-caput-mortuum.mb-2(class="ease-in-out focus:outline-none focus:border-2 focus:border-rose-red" placeholder="Password" type="password" name="password")
+    .mt-8.mx-auto.max-w-md 
+        .bg-navajo-white.py-8.px-4.shadow-xl.rounded-xl
+            form(action="/login/" method="POST" novalidate).space-y-5
+                div 
+                    label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="email") Email Register
+                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="user@domain.com" type="email" name="email")
+                div 
+                    label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="password") Password 
+                    input#name.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="*********" type="password" name="password")
+                
+                div 
+                    input#button_login.w-full.bg-rose-red.text-navajo-white.font-bold.p-2.rounded-xl(class="cursor-pointer hover:bg-red-800" type="submit" value="Login")
+                div.flex.items-center.justify-between 
+                    a.text-xs.text-caput-mortuum(href="/login/register" class="hover:underline decoration-raw-umber decoration-2") New user?, create an account
+                    a.text-xs.text-caput-mortuum(href="/login/password-rec" class="hover:underline decoration-raw-umber decoration-2") Forgot your password, recover it. 
 
-        div.flex.items-center.justify-between.w-full
-          a.text-xs.text-old-gold(href="/bienes-raices/users/login/register" style="color: #462521;" class="hover:underline underline-offset-6 decoration-2 decoration-majorelle-blue font-medium") Create an account
-          a.text-xs.text-caput-mortuum(href="/bienes-raices/users/login/recovery" style="color: #462521;" class="hover:underline underline-offset-6 decoration-2 decoration-majorelle-blue font-medium ease-in-out") Forgot your password? 
-            span.text-majorelle-blue Recover it
-        button(class="w-[50%] bg-reislin-black text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover:bg-english-violet/90 hover:bg-majorelle-blue active:scale-[0.95]" style="background-color: #CA2E55;" type="submit" value="Login in") Login In
+                script. 
+                    document.addEventListener("DOMContentLoaded", function(){
+                        const errorsAlerts = document.querySelectorAll('.bg-red-700');
+                        errorsAlerts.forEach((alert, index) =>{
+                            setTimeout(()=>{
+                                alert.style.transition = 'transfrom 0.4s esase-in-out';
+                                alert.style.transform= 'translateX(100%)';
+                                setTimeout(()=> {
+                                    alert.style.display = 'none';
+                                },400);
+                            },(index + 1) * 3000);
+                        });
+                    });

@@ -1,13 +1,14 @@
 doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Real State | #{page}
-    link(rel="stylesheet" href="/css/app.css", type="text/css")
-    link(rel="stylesheet" type="text/css" href="../../public/css/custom.css")
-  body.min-h-screen.bg-yellow-200
-    if showHeader 
-      include nav-bar
-    main(class="mx-auto container mt-10 px-2")
-      block content 
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Real State  &lt;220138 &gt; | #{page}
+        link(rel="stylesheet", href="/css/app.css", type='text/css')
+        block styles 
+    body.min-h-screen.bg-whiteColor
+        if showHeader 
+            include navbar
+        main(class="mx-auto container mt-5 px-2")
+            block content  
+        block scripts

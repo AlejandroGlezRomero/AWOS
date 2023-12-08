@@ -3,24 +3,24 @@ extends ../layout/index
 
 block content 
     div.py-5
-        h1.text-center.text-4xl.font-extrabold.my-3.text-majorelle-blue Real
-            span.font-bold.text-reislin-black State
+        h1.text-center.text-4xl.font-extrabold.my-3.text-rose-red Real
+            span.font-bold.text-old-gold State
     .mt-8.mx-auto
-        div(class="bg-mint-cream py-8 px-4 shadow-xl rounded-3xl flex flex-col items-center")
+        div(class="bg-navajo-white py-8 px-4 shadow-xl rounded-3xl flex flex-col items-center")
             h2.text-center.text-3xl.font-extrabold.mb-6= page
             if type==="Error"
-                div(class="bg-red-100 w-[60%] mb-5 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert")
+                div(class="bg-rose-red w-[60%] mb-5 border-t-4 border-rose-red rounded-b text-caput-mortuum px-4 py-3 shadow-md" role="alert")
                     p(class="text-xl font-bold text-center my-10")= notificationTitle
                     p(class="text-md font-medium text-center my-10")= notificationMessage
             else if type==="Warning"
-                div(class="bg-amber-100 border-t-4 w-[60%] mb-5 border-amber-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert")
+                div(class="bg-raw-umber border-t-4 w-[60%] mb-5 border-raw-umber rounded-b text-caput-mortuum px-4 py-3 shadow-md" role="alert")
                     p(class="text-xl font-bold text-center my-10")= notificationTitle
                     p(class="text-md font-medium text-center my-10")= notificationMessage
             else if type==="Info"
-                div(class="bg-teal-100 border-t-4 w-[60%] mb-5 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert")
+                div(class="bg-old-gold border-t-4 w-[60%] mb-5 border-old-gold rounded-b text-caput-mortuum px-4 py-3 shadow-md" role="alert")
                     p(class="text-xl font-bold text-center my-10")= notificationTitle
                     p(class="text-md font-medium text-center my-10")= notificationMessage
             else
-                p(class="text-md font-bold text-center mb-5")= message
+                p(class="text-md font-bold text-center mb-5 text-caput-mortuum")= message
 
-            a(class="w-[25%] bg-reislin-black text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover:bg-english-violet/90 hover:bg-majorelle-blue active:scale-[0.95] text-center" href="/bienes-raices/users/") Back to Log In
+            a(class="w-[25%] bg-rose-red text-white font-bold p-2 cursor-pointer rounded-xl ease-in-out transition-all hover:scale-[1.05] hover:bg-red-700 hover:bg-majorelle-blue active:scale-[0.95] text-center" href="/login") Back to Log In

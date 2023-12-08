@@ -1,40 +1,21 @@
-import express from "express";
-//import userController from '../controllers/userController.js';
-import {
-    formLogin,
-    formRegister,
-    formPasswordRecovery,
-    insertUser,
-    confirmAccount,
-    resetPassword,
-    changePassword,
-    updatePassword,
-    authenticateUser,
-    homePage
-  } from "../controllers/userController.js";
-  
-
-
-
+import express from 'express'
+import { formLogin, formRegister,formRecovery, insertUser,confirmAccount,resetPassword, authenticateUser, changePassword, updatePassword, homePage }from'../controllers/userController.js';
 const router = express.Router();
+router.get("/",formLogin);
+router.get("/register",formRegister);
+router.get("/recovery",formRecovery);
+router.post("/register",insertUser);
 
-router.get("/login/", formLogin)
-router.get("/login/register", formRegister);
-router.get("/login/recovery", formPasswordRecovery);
-router.post("/login/register-account", insertUser);
-
-// confirm account
-router.get("/login/confirm/:token", confirmAccount)
-
-// Reset Password
-router.post("/login/password-recovery", resetPassword);
-// Change Password
-router.get("/login/change-password/:tokenPassword", changePassword);
-router.post("/login/update-password/:tokenPassword", updatePassword);
-
-// Authenticate
-router.post('/', authenticateUser)  ;
+//Confirm account 
+router.get("/confirm/:token",confirmAccount);
+//Reset account
+router.post("/recovery",resetPassword);
+//Change Password
+router.get("/password-change/:tokenPassword",changePassword);
+router.post("/update-password/:tokenPassword",updatePassword);
+router.post("/",authenticateUser);
 
 router.get('/', homePage);
 
-export default router;
+   
+export default router

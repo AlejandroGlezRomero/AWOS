@@ -7,13 +7,10 @@ block content
 
     .mt-8.mx-auto.max-w-md 
         .bg-navajo-white.py-8.px-4.shadow-xl.rounded-xl
-            form(action=`/login/update-password/${tokenPassword}` method="POST").space-y-5  
+            form(action="/login/recovery" method="POST").space-y-5  
                 div 
                     label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="email") Email Register
-                    input#newPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="******" type="password" name="newPassword")
-                div 
-                    label.block.text-sm.text-rose-red.uppercase.mb-2.font-bold(for="email") Email Register
-                    input#confirmPassword.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="******" type="password" name="confirmPassword")
+                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-caput-mortuum.mb-2(placeholder="user@domain.com" type="email" name="email")
                 
                 div 
                     input#button_login.w-full.bg-rose-red.text-navajo-white.font-bold.p-2.rounded-xl(class="hover:bg-red-800 cursor-pointer" type="submit" value="Send me an Email")
