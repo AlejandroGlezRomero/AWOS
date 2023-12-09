@@ -18,7 +18,7 @@ block content
                     h3.text-lg.leading-6.font-md.tex-gray-900.font-bold Images of property
                     p.text-gray-600 Please drag and drop validate image files or browse in your files to select the image.
                 form(id='image' name="image" class="dropzone border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center mt-5" method="POST" action=`/property/addImage/${property.id}` enctype="multipart/form-data")
-                button#publish.w-full.bg-cyan-500.text-white(class="text-gray-800 font-bold py-3 mt-5 cursor-pointer bg-blue-200 rounded-xl hover:bg-cyan-600 hover:text-white" type="button" ) Publish Property
+                button#publish.w-full.bg-cyan-500.text-white(class="text-gray-800 font-bold py-3 mt-5 cursor-pointer bg-blue-200 rounded-xl hover:bg-rose-red hover:text-white" type="button" ) Publish Property
 
 block scripts
     script(src="/js/imageBox.js")

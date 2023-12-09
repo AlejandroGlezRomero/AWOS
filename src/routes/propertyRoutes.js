@@ -23,4 +23,7 @@ router.post("/create", protectRoute, saveProperty);
 router.get('/create/addImage/:idProperty', protectRoute, formAddImage);
 router.post('/addImage/:idProperty', protectRoute, upload.single('image'), loadImage); // Se agregó '.single('imageBox')' para manejar el archivo único
 
+router.get('/home', protectRoute, findAllByUserProperty);
+
+
 export default router;

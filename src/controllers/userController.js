@@ -354,7 +354,7 @@ const homePage = (request,response)=>{
     showHeader:true,
     user:{
       page: "My Properties",
-      name: 'emiliano'
+      name: 'Romero'
     }
   })
 }

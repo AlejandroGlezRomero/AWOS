@@ -1,0 +1,16 @@
+extends layout/index
+
+block content
+  h2.text-center.text-2xl.font-extrabold= page
+
+  if properties.length > 0
+    each property in properties
+      div.mb-4
+        h3= property.title
+        p= property.description
+        p= `Rooms: ${property.nRooms}, Bathrooms: ${property.nWC}, Parking: ${property.nParkinlots}`
+        p= `Address: ${property.address}`
+        a(href=`/property/details/${property.id}`) Ver detalles
+
+  else
+    p No properties found.
